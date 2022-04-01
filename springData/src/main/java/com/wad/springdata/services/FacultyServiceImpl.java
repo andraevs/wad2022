@@ -23,4 +23,8 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Faculty> findAll() {
         return (List<Faculty>) facultyRepository.findAll();
     }
-}
+
+    @Override
+    public List<Faculty> findFacultiesByName(String name) {
+        return facultyRepository.findFacultiesByName(name);
+    }}
