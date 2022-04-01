@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <title>Add product</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<div th:replace="fragments/general :: top"/>
+<form method="post" th:object="${product}" th:action="@{/products}">
+    <input th:field="*{name}">
+    <select th:field="*{type}">
+    <option th:each="type : ${T(com.example.mvcproducts.domain.ProductType).values()}"
+            th:value="${type}" th:text="${type}"></option>
+    <input th:field="*{price}">
+    </select>
+    <input type="submit">
+</form>
+</body>
+</html>
