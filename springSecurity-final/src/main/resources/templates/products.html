@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <title>See products</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<div th:replace="fragments/general :: top"/>
+<div th:each="product : ${products}">
+    <span th:text="${product.name}">name</span>
+    <span th:text="${product.price}">name</span>
+</div>
+</body>
+</html>
