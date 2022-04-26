@@ -1,0 +1,29 @@
+body {height:100%; width:960px; margin-left: auto; margin-right: auto;
+
+}
+
+.header img{
+    padding: 10px;
+}
+
+.header-text {
+font-size:xx-large;
+font-weight: bolder;
+text-align: center;
+}
+
+
+
+h1 {
+    font-size: 18px;
+}
+
+.form-element {
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.error-element {
+color:red;
+font-weight:bold;
+}
