@@ -1,6 +1,6 @@
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
-import {useState} from "react"
+import React, {useState} from "react"
 
 function App() {
   const INITIAL_PRODUCTS = [
@@ -9,6 +9,8 @@ function App() {
     { id: 3, name: "windows", price: 7.5, category: "software" },
   ];
 
+  // const INITIAL_PRODUCTS=[];
+
   const [products,addProduct] =useState(INITIAL_PRODUCTS);
 
   const addProductHandler = (product) => {
@@ -16,10 +18,10 @@ function App() {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <AddProduct onAddProduct={addProductHandler}></AddProduct>
       <Products items={products} />
-    </div>
+    </React.Fragment>
   );
 }
 
