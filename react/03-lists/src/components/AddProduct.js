@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 
 function AddProduct(props) {
-  const [spanText, setSpanText] = useState("Initial value");
-  const [inputVal, setInputVal] = useState("");
+  // const [spanText, setSpanText] = useState("Initial value");
+  // const [inputVal, setInputVal] = useState("");
+  const inputVal = useRef();
 
-  const textHandler = (event) => setInputVal(event.target.value);
+  // const textHandler = (event) => setInputVal(event.target.value);
 
   const clickHandler = () => {
     console.log("HI!");
     // setSpanText("Updated");
-    setSpanText(inputVal);
+    // setSpanText(inputVal);
     const newProduct = {
       id: Math.random(),
-      name: inputVal,
+      name: inputVal.current.value,
       category: "utility",
     };
     props.onAddProduct(newProduct);
@@ -20,8 +21,7 @@ function AddProduct(props) {
 
   return (
     <div>
-      <span>{spanText}</span>
-      <input type="text" value={inputVal} onChange={textHandler}></input>
+      <input type="text" ref={inputVal}></input>
       <button onClick={clickHandler}>Change value</button>
     </div>
   );
