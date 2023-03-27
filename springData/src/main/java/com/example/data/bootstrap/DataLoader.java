@@ -7,6 +7,7 @@ import com.example.data.domain.Student;
 import com.example.data.repositories.FacultyRepository;
 import com.example.data.services.FacultyService;
 import com.example.data.services.StudentService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class DataLoader implements CommandLineRunner {
     private final StudentService studentService;
     private final FacultyService facultyService;
 
-    public DataLoader(StudentService studentService, FacultyService facultyService, FacultyRepository facultyRepository) {
+    public DataLoader(StudentService studentService, @Qualifier("facultyServiceEm") FacultyService facultyService, FacultyRepository facultyRepository) {
         this.studentService = studentService;
         this.facultyService = facultyService;
     }
