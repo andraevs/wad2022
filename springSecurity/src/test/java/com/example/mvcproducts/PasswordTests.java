@@ -1,5 +1,6 @@
 package com.example.mvcproducts;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -16,8 +17,12 @@ public class PasswordTests {
 
     @Test
     void testBCrypt(){
-        PasswordEncoder bcrypt = new BCryptPasswordEncoder(12);
-        System.out.println(bcrypt.encode(PASSWORD));
-        System.out.println(bcrypt.encode(PASSWORD));
+        PasswordEncoder bcrypt = new BCryptPasswordEncoder(12); // by default 10
+        String s= bcrypt.encode(PASSWORD);
+        String t= bcrypt.encode(PASSWORD);
+        System.out.println(s);
+        System.out.println(t);
+        Assertions.assertTrue(bcrypt.matches(PASSWORD,s));
+        Assertions.assertTrue(bcrypt.matches(PASSWORD,t));
     }
 }
