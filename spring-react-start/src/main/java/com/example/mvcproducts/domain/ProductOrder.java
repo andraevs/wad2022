@@ -1,8 +1,8 @@
 package com.example.mvcproducts.domain;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
