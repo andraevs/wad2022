@@ -1,0 +1,26 @@
+services:
+  mysqldb:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ecommerce
+    networks:
+      - spring1
+    volumes:
+      - mysqlvol:/var/lib/mysql
+  app:
+    image: spring-boot-docker
+    ports:
+      - 8080:8080
+    networks:
+      - spring1
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/ecommerce
+    depends_on:
+      - mysqldb
+volumes:
+  mysqlvol: {}
+networks:
+  spring1: {}

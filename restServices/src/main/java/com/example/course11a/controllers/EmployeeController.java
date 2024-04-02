@@ -23,7 +23,7 @@ public class EmployeeController {
     return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
   }
 
-  @GetMapping("/{empId}")
+  @GetMapping("/{empId}")  // /api/v1/employees/2  OR /api/v1/employees?id=2
   public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable("empId") Long empId){
     return new ResponseEntity<>(employeeService.getEmployeeById(empId), HttpStatus.OK);
   }
