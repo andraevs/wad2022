@@ -51,6 +51,16 @@
             <version>3.3.3</version>
         </dependency>
     </dependencies>
-
-
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <mainClass>com.example.mvcproducts.MvcProductsApplication</mainClass>
+                <layout>JAR</layout>
+            </configuration>
+        </plugin>
+    </plugins>
+    </build>
 </project>

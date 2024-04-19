@@ -1,6 +1,6 @@
 services:
-  mysqldb:
-    image: mysql:latest
+  mariadb:
+    image: mariadb:latest
     ports:
       - 3306:3306
     environment:
@@ -14,12 +14,13 @@ services:
     image: spring-boot-docker
     ports:
       - 8080:8080
+    build: .
     networks:
       - spring1
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/ecommerce
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/ecommerce
     depends_on:
-      - mysqldb
+      - mariadb
 volumes:
   mysqlvol: {}
 networks:
