@@ -27,7 +27,6 @@ public class UserController {
          User authenticated = userDetailsService.checkUserCredentials(user.getUsername(), user.getPassword());
          if (authenticated != null){
              String jwtToken = jwtUtil.generateToken(user.getUsername());
-             System.out.println(jwtToken);
              return new ResponseEntity<>(jwtToken, HttpStatus.OK);
          } else {
              return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
