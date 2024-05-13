@@ -1,0 +1,1 @@
+Make sure to have in MySQL a database called "ecommerce"
