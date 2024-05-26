@@ -67,7 +67,6 @@ public class BookController {
 
     @MutationMapping
     public void deleteBook(@Argument Long id) {
-        System.out.println(id);
         bookService.deleteBook(id);
     }
 }
