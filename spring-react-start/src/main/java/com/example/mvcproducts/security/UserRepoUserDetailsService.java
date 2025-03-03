@@ -32,4 +32,9 @@ public class UserRepoUserDetailsService implements UserDetailsService {
         }
         return null;
     }
+
+    public boolean userExists(String username) {
+        User user = userRepository.findByUsername(username);
+            return (user!=null);
+    }
 }

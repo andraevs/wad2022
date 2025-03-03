@@ -1,6 +1,7 @@
 package com.example.mvcproducts.restcontrollers;
 
 import com.example.mvcproducts.domain.Product;
+import com.example.mvcproducts.security.JwtUtil;
 import com.example.mvcproducts.services.ProductService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,16 +15,24 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 public class ProductRestController {
 
+    private final JwtUtil jwtUtil;
     private final ProductService productService;
 
-    public ProductRestController(ProductService productService) {
+    public ProductRestController(JwtUtil jwtUtil, ProductService productService) {
+        this.jwtUtil = jwtUtil;
         this.productService = productService;
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Product>> getAllProducts(){
+    public ResponseEntity<List<Product>> getAllProducts(@RequestHeader(value="Authorization") String token){
+        token=token.substring(7);
+        System.out.println(token);
+        if (!jwtUtil.validateToken(token)) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
+
 
 
     //add and also return the location of the new resource
