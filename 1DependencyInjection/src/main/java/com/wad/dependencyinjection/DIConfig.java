@@ -12,7 +12,6 @@ public class DIConfig {
     public MessageService emailService(){
         return new EmailService();
     }
-    //MyDIApplication myApplication = (MyDIApplication) ctx.getBean("myDIApplication");
     @Bean
     public MyDIApplication myDIApplication(MessageService service){
         return new MyDIApplication(service);
