@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//@Primary
 @Service
 public class FacultyServiceEm implements FacultyService {
     @PersistenceContext
