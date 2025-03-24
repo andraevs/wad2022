@@ -1,17 +1,17 @@
-package com.example.mvcproducts.security;
-
+package com.example.mvcproducts.services;
 
 import com.example.mvcproducts.domain.User;
 import com.example.mvcproducts.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserRepoUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public UserDetailsService(UserRepository userRepository) {
+    public UserRepoUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
