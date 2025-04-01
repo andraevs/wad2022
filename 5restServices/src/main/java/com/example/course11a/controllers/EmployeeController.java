@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -47,6 +48,10 @@ public class EmployeeController {
   @PutMapping("/{empId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updateEmployee(@PathVariable("empId") Long empId, @RequestBody EmployeeDTO emp){
+    if (emp.getId() != null && !empId.equals(emp.getId())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID in path and body must match");
+    }
+    emp.setId(empId);
     employeeService.updateEmployee(empId,emp);
   }
 
