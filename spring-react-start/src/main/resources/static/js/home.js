@@ -4,7 +4,7 @@ const addProductButton = document.getElementById("addProductButton");
 refreshProducts();
 
 function refreshProducts(){
-    fetch('/api/v1/products/')
+    fetch('/api/v1/products')
         .then(response => response.json())
         .then(data => showProducts(data));
 }
