@@ -1,4 +1,18 @@
-FROM openjdk:21
-ADD target/springSecurity-0.0.1-SNAPSHOT.jar myapp.jar
-RUN sh -c 'touch /myapp.jar'
-ENTRYPOINT ["java","-jar","/myapp.jar"]
+#FROM eclipse-temurin:25-jdk
+#WORKDIR /app
+#COPY target/*.jar myapp.jar
+#ENTRYPOINT ["java", "-jar", "/app/myapp.jar"]
+
+
+# Stage 1: Build
+FROM maven:3.9-eclipse-temurin-25 AS builder
+WORKDIR /build
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run
+FROM eclipse-temurin:25-jdk
+WORKDIR /app
+COPY --from=builder /build/target/*.jar myapp.jar
+ENTRYPOINT ["java", "-jar", "/app/myapp.jar"]
