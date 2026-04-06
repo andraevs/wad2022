@@ -11,13 +11,14 @@ services:
     volumes:
       - mysqlvol:/var/lib/mysql
     healthcheck:
-      test: [ "CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -uroot -proot || exit 1" ]
-      interval: 5s
+      test:
+        ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -uroot -proot || exit 1"]
+      interval: 2s
       timeout: 3s
-      retries: 20
-      start_period: 20s
+      retries: 10
+      start_period: 15s
   app:
-    image: spring-boot-docker
+    image: spring-react-start
     ports:
       - "8080:8080"
     build: .
