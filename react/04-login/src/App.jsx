@@ -23,7 +23,7 @@ export default function App() {
   async function fetchProductHandler() {
     setIsLoading(true);
     const token = localStorage.getItem("jwtToken");
-    const response = await fetch("http://localhost:8080/api/v1/products/", {
+    const response = await fetch("http://localhost:8080/api/v1/products", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

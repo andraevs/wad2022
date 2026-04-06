@@ -3,7 +3,6 @@ import Products from "./components/Products";
 import { useState, useEffect } from "react";
 
 export default function App() {
-
   const [products, addProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,7 +11,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem('jwtToken');
+    const token = localStorage.getItem("jwtToken");
     if (token) {
       setIsLoggedIn(true);
     } else {
@@ -22,10 +21,10 @@ export default function App() {
 
   async function fetchProductHandler() {
     setIsLoading(true);
-    const token = localStorage.getItem('jwtToken');
-    const response = await fetch('http://localhost:8080/api/v1/products/', {
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch("http://localhost:8080/api/v1/products", {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
@@ -50,5 +49,3 @@ export default function App() {
     </>
   );
 }
-
-

@@ -21,7 +21,6 @@ public class DataLoader implements CommandLineRunner {
     this.productService = productService;
     this.userService = userService;
   }
-
   @Override
   public void run(String... args) throws Exception {
     List<Product> productList = List.of(

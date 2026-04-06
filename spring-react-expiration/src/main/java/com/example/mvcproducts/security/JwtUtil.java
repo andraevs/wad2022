@@ -1,13 +1,13 @@
 package com.example.mvcproducts.security;
 
+import com.example.mvcproducts.services.UserRepoUserDetailsService;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.function.Function;
 
@@ -20,7 +20,7 @@ public class JwtUtil {
         this.userDetailsService = userDetailsService;
     }
 
-    private final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -36,11 +36,11 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        Jws<Claims> claimsJws = Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY)
+        return Jwts.parser()
+                .verifyWith(SECRET_KEY)
                 .build()
-                .parseClaimsJws(token);
-        return claimsJws.getBody();
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -52,9 +52,12 @@ public class JwtUtil {
     }
 
     private String createToken(String subject) {
-        return Jwts.builder().setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256).compact();
+        return Jwts.builder()
+                .subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+                .signWith(SECRET_KEY)
+                .compact();
     }
 
     public Boolean validateToken(String token) {

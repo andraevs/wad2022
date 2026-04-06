@@ -1,12 +1,15 @@
 package com.example.mvcproducts.restcontrollers;
 
-
 import com.example.mvcproducts.domain.User;
 import com.example.mvcproducts.dto.UserDTO;
 import com.example.mvcproducts.security.JwtUtil;
-import com.example.mvcproducts.security.UserRepoUserDetailsService;
+import com.example.mvcproducts.services.UserRepoUserDetailsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,12 +27,12 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserDTO user){
-         User authenticated = userDetailsService.checkUserCredentials(user.getUsername(), user.getPassword());
-         if (authenticated != null){
-             String jwtToken = jwtUtil.generateToken(user.getUsername());
-             return new ResponseEntity<>(jwtToken, HttpStatus.OK);
-         } else {
-             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-         }
+        User authenticated = userDetailsService.checkUserCredentials(user.getUsername(), user.getPassword());
+        if (authenticated != null){
+            String jwtToken = jwtUtil.generateToken(user.getUsername());
+            return new ResponseEntity<>(jwtToken, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 }

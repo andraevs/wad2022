@@ -1,4 +1,4 @@
-package com.example.mvcproducts.security;
+package com.example.mvcproducts.services;
 
 import com.example.mvcproducts.domain.User;
 import com.example.mvcproducts.repositories.UserRepository;
@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRepoUserDetailsService implements UserDetailsService {
+public class UserRepoUserDetailsService implements UserDetailsService,UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -36,5 +36,10 @@ public class UserRepoUserDetailsService implements UserDetailsService {
     public boolean checkUserExists(String username) {
         User user = userRepository.findByUsername(username);
         return(user != null);
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
     }
 }
