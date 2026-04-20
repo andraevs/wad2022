@@ -26,7 +26,6 @@ services:
       - spring1
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/ecommerce
-      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       mariadb:
         condition: service_healthy

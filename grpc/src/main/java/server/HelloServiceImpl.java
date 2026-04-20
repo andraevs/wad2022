@@ -1,8 +1,8 @@
 package server;
 
-
-import grpc.*;
-
+import grpc.HelloRequest;
+import grpc.HelloResponse;
+import grpc.HelloServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
