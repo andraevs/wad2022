@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:18.3
+    container_name: demo-postgres
+    environment:
+      POSTGRES_USER: lecture_user
+      POSTGRES_PASSWORD: lecture_pass
+      POSTGRES_DB: lecture_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+volumes:
+  pgdata: {}
